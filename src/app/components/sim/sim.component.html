@@ -1,0 +1,61 @@
+<nav class="navbar">
+  <div class="navbar-status">
+    🔐 <strong>Keycloak:</strong> {{ keycloakStatus }}
+  </div>
+
+  <div class="navbar-actions">
+    @if (!authenticated) {
+      <button class="btn login" (click)="login()">Login</button>
+    } @else {
+      <button class="btn logout" (click)="logout()">Logout</button>
+    }
+  </div>
+</nav>
+
+
+@if (authenticated) {
+  <div class="p-3" *kaHasRoles="['USER']">
+    <div class="card">
+      <div class="card-header">Products</div>
+      <div class="card-body">
+        <h2>Sim Cards</h2>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>simNumber</th>
+              <th>subscriptionType</th>
+              <th>planName</th>
+              <th>dataLimit</th>
+              <th>callLimit</th>
+              <th>smsLimit</th>
+              <th>activationDate</th>
+              <th>expirationDate</th>
+              <th>isActive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of sims">
+              <td>{{ s.id }}</td>
+              <td>{{ s.simNumber }}</td>
+              <td>{{ s.subscriptionType }}</td>
+              <td>{{ s.planName }}</td>
+              <td>{{ s.dataLimit }}</td>
+              <td>{{ s.callLimit }}</td>
+              <td>{{ s.smsLimit }}</td>
+              <td>{{ s.activationDate }}</td>
+              <td>{{ s.expirationDate }}</td>
+              <td>{{ s.isActive }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="p-3">
+    <div class="alert alert-warning" role="alert">
+      🔐 You must be logged in to view SIM card data.
+    </div>
+  </div>
+}
