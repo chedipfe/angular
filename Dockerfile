@@ -5,11 +5,9 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM node:22-alpine
-WORKDIR /app
-RUN adduser -D myuser
-USER myuser
-COPY --from=build --chown=myuser:myuser  /app/dist/front .
-EXPOSE 4200
-CMD ["node", "server/server.mjs"]
+FROM nginx:alpine
+COPY --from=build /app/dist/front/browser /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
 
