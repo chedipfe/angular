@@ -11,13 +11,13 @@ import {
 // http://localhost:8081 est le url de serveur backend qui expose ses API protégés par keycloak
 // On crée un intercepteur qui ajoute l'access token issu de keycloak au header Authorization: Bearer <token>  la requete vers l'api protégé
   const localhostCondition = createInterceptorCondition<IncludeBearerTokenCondition>({
-    urlPattern: /^(http:\/\/localhost:8081)(\/.*)?$/i
+    urlPattern: /^(http:\/\/spring-service:80)(\/.*)?$/i
   });
   
   export const provideKeycloakAngular = () =>
     provideKeycloak({
       config: {
-        url: 'http://172.29.90.170:8080',
+        url: 'http://keycloak:80',
         realm: 'chedi_realm',
         clientId: 'service-client'
       },
