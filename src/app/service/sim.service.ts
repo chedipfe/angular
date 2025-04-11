@@ -7,7 +7,7 @@ import { SimComponent } from '../components/sim/sim.component';
   providedIn: 'root'
 })
 export class SimService {
-  private apiUrl = 'http://spring-service:80/api/sim-card-subscriptions/getall';
+  private apiUrl = 'http://spring-service.my-application.svc.cluster.local:80/api/sim-card-subscriptions/getall';
   private http = inject(HttpClient);
 
   listsims(): Observable<SimComponent[]> {
