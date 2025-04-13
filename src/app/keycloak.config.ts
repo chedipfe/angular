@@ -17,7 +17,7 @@ import {
   export const provideKeycloakAngular = () =>
     provideKeycloak({
       config: {
-        url: 'http://keycloak.com',
+        url: 'http://keycloak.keycloak.svc.cluster.local',
         realm: 'chedi_realm',
         clientId: 'service-client'
       },
